@@ -167,7 +167,7 @@ impl Parse for ProcMacroArgument {
         braced!(content in input);
 
         Ok(Self {
-            err: err.unwrap_or(Ident::new("std::String", ident.span())),
+            err: err.unwrap_or(Ident::new("String", ident.span())),
             len: len.unwrap_or(18),
             ident,
             arguments: content.parse_terminated(Argument::parse, Token![,])?,
@@ -262,6 +262,7 @@ fn generate_extract(ident: Ident, args: Vec<Argument>, err: Ident, len: usize) -
                     type Output<'b> = #target_ty where #(#where_bonud_tys: 'b),*;
                     type Error = #err;
 
+                    #[allow(unused)]
                     fn extract(#(#extract_args),*) -> std::result::Result<Self::Output<'a>, Self::Error> {
                         #output
                     }
@@ -333,6 +334,8 @@ fn generate_handler(ident: Ident, args: Vec<Argument>, err: Ident, len: usize) -
                     type Output = Out;
                     type Error = Err;
 
+                    #[inline]
+                    #[allow(non_snake_case)]
                     fn handle(&mut self, #(#handle_args,)* #args_ty: #args_ty) -> std::result::Result<Self::Output, Self::Error> {
                         (self)(#extract_call_args #extracted_tys)
                     }
