@@ -1,7 +1,7 @@
 
-# Cote-Derive
+# Extractor
 
-Procedural macro implementation for cote.
+A procedural macro generate the code for extactor pattern.
 
 # Example
 
