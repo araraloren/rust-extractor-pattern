@@ -1,2 +1,4 @@
-# rust-extractor-pattern
-A procedural macro can generate extractor pattern
+
+# Cote-Derive
+
+Procedural macro implementation for cote.
